@@ -20,7 +20,7 @@ const RestaurantSingleReview = ({ review: r }) => {
             </Link>
           </span>
         </h4>
-        <p className="card-text pt-2" dangerouslySetInnerHTML={{ __html: r.content }} />
+        <p className="card-text pt-2" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(r.content) }} />
       </div>
     </div>
   );
