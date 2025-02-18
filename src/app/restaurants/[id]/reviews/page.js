@@ -4,8 +4,16 @@ import DataService from "../../../../data.service";
 import { useParams } from 'next/navigation';
 import Link from "next/link";
 import DOMPurify from "isomorphic-dompurify";
+import { useEffect, useRef } from 'react';
 
 const RestaurantSingleReview = ({ review: r }) => {
+  const reviewContent = useRef();
+	useEffect(() => {
+		if(reviewContent.current) {
+			reviewContent.current.innerHTML = r.content;
+		}
+	})
+
   return (
     <div key={r.id} className="card w-75 mt-4 mb-2">
       <div className="card-body">
@@ -20,7 +28,7 @@ const RestaurantSingleReview = ({ review: r }) => {
             </Link>
           </span>
         </h4>
-        <p className="card-text pt-2" dangerouslySetInnerHTML={{ __html: r.content }} />
+        <p className="card-text pt-2" ref={reviewContent} />
       </div>
     </div>
   );
